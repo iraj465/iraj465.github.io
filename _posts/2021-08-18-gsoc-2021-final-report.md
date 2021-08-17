@@ -18,9 +18,11 @@ tags: [blog, gsoc, ceph, RGW, S3, coverage]
 As it stands today, [s3-tests](https://github.com/ceph/s3-tests) use a limited fraction of the Boto S3 functionality. By instrumenting code coverage of AWS Boto SDK and s3-tests, gaps in s3-tests can be identified. The `objective` of this project is to identify parts of unused S3 source code of AWS SDKs using code coverage tools and consequently facilitate writing compatibility tests in s3-tests that cover those portions of the SDK for better coverage.
 
 ## Getting started
-- Firstly, to get started clone this `[repository](https://github.com/robbat2/rgw-s3-coverage-testing)`.
+- Firstly, to get started clone this [repository](https://github.com/robbat2/rgw-s3-coverage-testing).
+
+
 To build the RGW `s3-tests` testing environment with coverage follow the instructions below:
-- ``Build using Scripts (stable)``: The script **bootstrap** starts a (ceph-demo)[https://github.com/ceph/ceph-container/blob/master/src/daemon/demo.sh] cluster in a container and also an [ceph/s3-tests](https://github.com/ceph/s3-tests) container against the RGW of the ceph-demo cluster. It also automates generating `coverage` reports `(JSON+XML+HTML)` and a XML output of s3-tests that was run (nose-output.xml). 
+- ``Build using Scripts (stable)``: The script **bootstrap** starts a [ceph-demo](https://github.com/ceph/ceph-container/blob/master/src/daemon/demo.sh) cluster in a container and also an [s3-tests](https://github.com/ceph/s3-tests) container against the RGW of the ceph-demo cluster. It also automates generating `coverage` reports `(JSON+XML+HTML)` and a XML output of s3-tests that was run (nose-output.xml). 
 
 A sample configuration file named ``s3tests.conf.SAMPLE`` has been provided in this repo which serves as the configuration file for running s3tests. Make changes in the ``.SAMPLE`` file itself, boostrap script would generate corresponding ``.conf`` file for you with appropriate configurations.
 
@@ -64,6 +66,7 @@ To gather a list of tests being run, run this:
 ```
 ./bootstrap --collect-only
 ```
+
 - ``Using Docker-compose (WIP)``: To start the ceph cluster and the s3-tests container simply run the following command to bootstrap both the services in docker-compose. It's in-between container networking portion is still WIP, features to be added.
 ```
 docker-compose up -d
