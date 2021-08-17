@@ -106,8 +106,109 @@ In this phase of the project, we refactored our scripts and docker related files
 ### Analyzing coverage of the source SDK files
 In the last phase of project, we explored and implemented a Python script (a.k.a [`analyzer.py`](https://github.com/robbat2/rgw-s3-coverage-testing/blob/main/analyzer.py)) which analyzes the `coverage.json` file and identifies the portions of the Boto SDK source files that needs coverage and lists out the sourc file signatures with the corresponding source-file paths in the `cov-analysis.txt` file against the test that was run against the RGW.
 
-**Idea**:
-3. Creating a Python script that analyzes the coverage output (`coverage.json`) and identifies portions of Boto SDK with low coverage.
+**Aim**
+From the generated coverage reports (XML,JSON) we want to find the exact function definitions in Boto SDK source files which were hit when a specific test was run against the RGW.
+
+**Idea**: 
+We extract the information from coverage output obtained for the Boto SDK source files. To that end, we parse the `coverage.json`. A snippet of it is provided below:
+
+```json
+{
+"files": {
+        "/s3-tests/s3tests_boto3/functional/policy.py": {
+                    "executed_lines": [
+                        1,
+                        3,
+                        4,
+                        11,
+                        23,
+                        24,
+                        27,
+                        31,
+                        40
+                    ],
+                    "summary": {
+                        "covered_lines": 9,
+                        "num_statements": 26,
+                        "percent_covered": 30.0,
+                        "missing_lines": 17,
+                        "excluded_lines": 0,
+                        "num_branches": 4,
+                        "num_partial_branches": 0,
+                        "covered_branches": 0,
+                        "missing_branches": 4
+                    },
+                    "missing_lines": [
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        12,
+                        18,
+                        19,
+                        21,
+                        25,
+                        28,
+                        29,
+                        32,
+                        38,
+                        44,
+                        45,
+                        46
+                    ],
+                    "excluded_lines": []
+          }
+ }
+```
+
+With each source file attribute under ``files`` we checked whether it was a Boto SDK source file and then consequently we extracted the `missing_lines` list and other coverage measures for each such source s3 SDK file. The next step was to identify from the `missing_lines` list the function signatures in the corresponding source files which needs more coverage. 
+
+**Solution approach**
+
+1. We set the Boto SDK source files' python function signatures as an `Interval tree` ( each interval spans the starting line number as lower limit and function end line number as upper limit).
+
+2. When run against the exact line number of coverage output, we can compute exact function coverage of function definitions through the interval tree and identify the corresponding list of Boto SDK source-file function signatures where new tests need to be written for better coverage.
+
+A snippet of the output of the `cov-analysis.txt` for the test `s3tests_boto3.functional.test_s3:test_bucket_acl_default` is given below:
+
+> ...
+> URL:/s3-tests/virtualenv/lib/python3.6/site-packages/boto3/s3/inject.py
+>FUNCTION:object_summary_load
+>FUNCTION:upload_file
+>FUNCTION:download_file
+>FUNCTION:bucket_upload_file
+>FUNCTION:bucket_download_file
+>FUNCTION:object_upload_file
+>FUNCTION:upload_fileobj
+>FUNCTION:bucket_upload_fileobj
+>FUNCTION:object_upload_fileobj
+>FUNCTION:download_fileobj
+>FUNCTION:bucket_download_fileobj
+>FUNCTION:object_download_fileobj
+> ...
+
+Another snippet of the output of the `cov-analysis.txt` for the test `s3tests.functional.test_s3.test_append_normal_object` is given below:
+
+> ...
+>URL:/s3-tests/virtualenv/lib/python3.6/site-packages/boto/s3/bucketlistresultset.py
+>FUNCTION:bucket_lister
+>FUNCTION:__init__
+>FUNCTION:__iter__
+>FUNCTION:versioned_bucket_lister
+>FUNCTION:multipart_upload_lister
+>FUNCTION:object_download_fileobj
+> ...
+>URL:/s3-tests/virtualenv/lib/python3.6/site-packages/boto/s3/connection.py
+>FUNCTION:check_lowercase_bucketname
+>FUNCTION:wrapper
+>FUNCTION:get_bucket_server
+>FUNCTION:build_url_base
+>FUNCTION:build_host
+>FUNCTION:build_auth_path
+>FUNCTION:build_path_base
+> ...
+
 
 
 ## Pull Request history
