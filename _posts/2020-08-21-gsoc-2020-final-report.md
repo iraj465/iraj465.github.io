@@ -1,18 +1,16 @@
 ---
 layout: post
-title: Final report for GSoC '20
-subtitle: My journey with rubygems.org
-gh-repo: vachhanihpavan/rubygems.org
+title: Final report for GSoC'21
+subtitle: RGW S3 Coverage testing
+gh-repo: robbat2/rgw-s3-coverage-testing
 gh-badge: [star, fork, follow]
 cover-img: /assets/img/2020-08-16/cover.png
 thumbnail-img: /assets/img/2020-08-16/thumb.png
-tags: [blog, gsoc, ruby, rubygems.org]
+tags: [blog, gsoc, ceph, RGW, S3, coverage]
 ---
 
-## Background
-`gem` is a standard format for distributing Ruby libraries or packages provided by RubyGems package manager.
-[rubygems.org](https://rubygems.org) is the Ruby community's gem hosting service to publish and fetch gems.
-The user of RubyGems who has permission who push/yank any version of a gem are called the *owners* of that gem.
+## Introduction
+As it stands today, [Ceph/s3-tests](https://github.com/ceph/s3-tests) use a limited fraction of the Boto S3 functionality. By instrumenting code coverage of AWS Boto SDK and Ceph/s3-tests, gaps in Ceph/s3-tests can be identified. The objective of this project is to identify parts of unused S3 source code of AWS SDKs using code coverage tools and consequently facilitate writing compatibility tests in Ceph/s3-tests that cover those portions of the SDK for better coverage.
 
 ## My Project
 My Google Summer of Code project with Ruby was focused on "Adding functionality of add/remove gem owners via Web UI".
