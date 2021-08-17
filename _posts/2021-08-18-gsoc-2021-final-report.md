@@ -10,29 +10,65 @@ tags: [blog, gsoc, ceph, RGW, S3, coverage]
 ## Google Summer of Code 2021 Project
 - **Title**: RGW: S3 SDK Compatibility
 - **Project link**: [Take me there!](https://summerofcode.withgoogle.com/projects/#5755795897057280)
-- **Mentors**: Robin H. Johnson<robbat2@orbis-terrarum.net> & Ali Maredia
+- **Mentors**: [Robin H. Johnson](robbat2@orbis-terrarum.net) & [Ali Maredia](amaredia@redhat.com)
 - **Organization**: [Ceph](https://ceph.com/en/)
-- **Repository**: [RGW S3 Coverage testing]
+- **Repository**: [RGW S3 Coverage testing](https://github.com/robbat2/rgw-s3-coverage-testing)
 
 ## Introduction
-As it stands today, [Ceph/s3-tests](https://github.com/ceph/s3-tests) use a limited fraction of the Boto S3 functionality. By instrumenting code coverage of AWS Boto SDK and Ceph/s3-tests, gaps in Ceph/s3-tests can be identified. The objective of this project is to identify parts of unused S3 source code of AWS SDKs using code coverage tools and consequently facilitate writing compatibility tests in Ceph/s3-tests that cover those portions of the SDK for better coverage.
+As it stands today, [s3-tests](https://github.com/ceph/s3-tests) use a limited fraction of the Boto S3 functionality. By instrumenting code coverage of AWS Boto SDK and s3-tests, gaps in s3-tests can be identified. The `objective` of this project is to identify parts of unused S3 source code of AWS SDKs using code coverage tools and consequently facilitate writing compatibility tests in s3-tests that cover those portions of the SDK for better coverage.
 
-## My Project
-My Google Summer of Code project with Ruby was focused on "Adding functionality of add/remove gem owners via Web UI".
-The aim of this project is ensure frictionless management of ownerships without setting up CLI. This project will also
-help continue maintaining gems by pointing interested users to gems which need maintainers and reviving unmaintained ones.
+## Getting started
+- Firstly, to get started clone this `[repository](https://github.com/robbat2/rgw-s3-coverage-testing)`.
+To build the RGW `s3-tests` testing environment with coverage follow the instructions below:
+- ``Build using Scripts (stable)``: The script **bootstrap** starts a (ceph-demo)[https://github.com/ceph/ceph-container/blob/master/src/daemon/demo.sh] cluster in a container and also an [ceph/s3-tests](https://github.com/ceph/s3-tests) container against the RGW of the ceph-demo cluster. It also automates generating `coverage` reports `(JSON+XML+HTML)` and a XML output of s3-tests that was run (nose-output.xml). 
 
-This blog post is for my final submission of GSoC project. 
- 
+A sample configuration file named ``s3tests.conf.SAMPLE`` has been provided in this repo which serves as the configuration file for running s3tests. Make changes in the ``.SAMPLE`` file itself, boostrap script would generate corresponding ``.conf`` file for you with appropriate configurations.
 
-- Project: [Add gem owner add and remove in web UI of rubygems.org](https://summerofcode.withgoogle.com/projects/#5841025752367104)
-- Mentor: [Aditya Prakash](https://github.com/sonalkr132)
-- Organisation: [Ruby](https://summerofcode.withgoogle.com/organizations/6676829491953664/)
-- Project Page: [https://rubygsoc.github.io/add-gem-owner-add-and-remove-in-web-ui-of-rubygems.org/](https://rubygsoc.github.io/add-gem-owner-add-and-remove-in-web-ui-of-rubygems.org/)
+The scripts takes in arguments of the section of s3-tests to run along with nosetests.
+The boostrap script already includes the prefix ``
+S3TEST_CONF=your.conf ./virtualenv/bin/nosetests -v``.The corresponding section of tests to run that comes after the above command is provided as argument to the bootstrap script.
 
-Under this project, there were 2 parts to be implemented:
-1. Functionality to add/remove owners of a gem via web UI similar to [CLI](https://guides.rubygems.org/command-reference/#gem-owner)
-2. New ownership transfer flow where owners can put up a gem for adoption and interested users can apply for ownership
+For example, if you want to run all the s3-tests like this:
+```
+S3TEST_CONF=your.conf ./virtualenv/bin/nosetests
+```
+Then simply run:
+```
+./bootstrap
+```
+If you want to specify which directory of tests to run like this:
+```
+S3TEST_CONF=your.conf ./virtualenv/bin/nosetests s3tests.functional
+```
+Then run:
+```
+./bootstrap s3tests.functional
+```
+If you want to specify which file of tests to run like this:
+```
+S3TEST_CONF=your.conf ./virtualenv/bin/nosetests s3tests.functional.test_s3
+```
+Then run:
+```
+./bootstrap s3tests.functional.test_s3
+```
+If you want to specify which test to run like this:
+```
+S3TEST_CONF=your.conf ./virtualenv/bin/nosetests s3tests.functional.test_s3:test_bucket_list_empty
+```
+Then run:
+```
+./bootstrap s3tests.functional.test_s3:test_bucket_list_empty
+```
+To gather a list of tests being run, run this:
+```
+./bootstrap --collect-only
+```
+- ``Using Docker-compose (WIP)``: To start the ceph cluster and the s3-tests container simply run the following command to bootstrap both the services in docker-compose. It's in-between container networking portion is still WIP, features to be added.
+```
+docker-compose up -d
+```
+
 
 Pull requests created in the period of GSoC:
 
