@@ -18,7 +18,6 @@ tags: [blog, gsoc, ceph, RGW, S3, coverage]
 As it stands today, [s3-tests](https://github.com/ceph/s3-tests) use a limited fraction of the Boto S3 functionality. By instrumenting code coverage of AWS Boto SDK and s3-tests, gaps in s3-tests can be identified. The `objective` of this project is to identify parts of unused S3 source code of AWS SDKs using code coverage tools and consequently facilitate writing compatibility tests in s3-tests that cover those portions of the SDK for better coverage.
 
 ## Contents
-
 - [Getting started](#getting-started)
 - [Coverage output](#coverage-output)
 - [Project Goals](#project-goals)
