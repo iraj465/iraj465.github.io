@@ -21,8 +21,8 @@ As it stands today, [s3-tests](https://github.com/ceph/s3-tests) use a limited f
 
 - [Getting started](#getting-started)
 - [Coverage output](#coverage-output)
-- [Options](#options)
-  - [Sidebar menu](#sidebar-menu)
+- [Project Goals](#project-goals)
+  - [Automating s3tests and ceph cluster with coverage](#automating-s3tests-and-ceph-cluster-with-coverage)
   - [Sticky sidebar content](#sticky-sidebar-content)
   - [Themes](#themes)
   - [Reverse layout](#reverse-layout)
@@ -83,9 +83,10 @@ To gather a list of tests being run, run this:
 ```
 docker-compose up -d
 ```
+*Note: You can modify the `.conf.SAMPLE` according to your requirements and the `bootstrap` script will generate the corresponding `.conf` file internally.
+
 ## Coverage output
 Leveraging the above build methods with specified tests, an output directory will appear by the name of `s3tests-output/`. This directory contains the following files:
-
 - `cov-analysis.txt`: Contains a list of all Boto SDK s3 source files with corresponding function signatures that has less than 100% coverage. Read more here.
 - `report.txt`: Contains a tabular representation of the coverage (hits and misses) of the source files against the test.
 - `coverage_html/`:  This directory contains all the annotated coverage html files for easy viewing of coverage output corresponding to the test ran.
@@ -94,7 +95,16 @@ Leveraging the above build methods with specified tests, an output directory wil
 - `nose-output.xml`: This XML file contains the output of the tests that was run against the RGW for easy debugging pruposes. 
 
 ## Project Goals
+The project work during the GSoC period can be divided into three parts:
 
+### Automating s3tests and ceph cluster with coverage
+In the first part of the project, we automated the running of [s3-tests](https://github.com/ceph/s3-tests) with coverage tools against the RGW of the ceph-demo cluster in a dockerized setup. The coverage library used is the [coverage.py](https://coverage.readthedocs.io/en/coverage-5.5/) python package. In this portion we created the Dockerfile for running s3-tests with coverage and bootstrapping the ceph-demo cluster with the necessary configuration as mentioned in the `.conf.SAMPLE` file. The `host_IP` in the `.conf.SAMPLE` is set accordingly to the set container IP of the ceph-demo cluster in the system.
+
+### 2. Generating coverage output files for the test that was run against the RGW in all three formats: `HTML`, `JSON`, `XML`.
+### 3. Creating a Python script that analyzes the coverage output (`coverage.json`) and identifies portions of Boto SDK with low coverage.
+
+
+## Pull Request history
 Pull requests created in the period of GSoC:
 
 | **PR Title**                                                                                              | **Review Status** | **Merge Status** |
