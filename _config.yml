@@ -11,10 +11,10 @@ author: Saptarshi Majumder
 
 # --- List of links in the navigation bar --- #
 
-navbar-links:
-  About Me: "aboutme"
-  Blog: tags#blog
-  Projects: tags#project
+# navbar-links:
+#   About Me: "aboutme"
+#   Blog: tags#blog
+#   Projects: tags#project
 
 # --- Logo --- #
 
