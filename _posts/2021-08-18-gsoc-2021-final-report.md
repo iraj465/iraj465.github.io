@@ -24,9 +24,9 @@ As it stands today, [s3-tests](https://github.com/ceph/s3-tests) use a limited f
   - [Automating s3tests and ceph cluster with coverage](#automating-s3tests-and-ceph-cluster-with-coverage)
   - [Generating coverage output files](#generating-coverage-output-files)
   - [Analyzing coverage of the source SDK files](#analyzing-coverage-of-the-source-sdk-files)
-- [Development](#development)
-- [Author](#author)
-- [License](#license)
+- [Pull Request changelog](#pull-request-changelog)
+- [Work left To Do (Future Work)](#work-left-to-do(future-work))
+- [Credits](#special-thanks)
 
 ## Getting started
 Firstly, to get started clone this [repository](https://github.com/robbat2/rgw-s3-coverage-testing).
