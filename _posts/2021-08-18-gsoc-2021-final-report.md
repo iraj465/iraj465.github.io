@@ -1,13 +1,18 @@
 ---
 layout: post
 title: Final report for GSoC'21
-subtitle: RGW S3 Coverage testing
 gh-repo: robbat2/rgw-s3-coverage-testing
-gh-badge: [star, fork, follow]
 cover-img: /assets/img/2020-08-16/cover.png
 thumbnail-img: /assets/img/2020-08-16/thumb.png
 tags: [blog, gsoc, ceph, RGW, S3, coverage]
 ---
+
+## Google Summer of Code 2021 Project
+- **Title**: RGW: S3 SDK Compatibility
+- **Project link**: [Take me there!](https://summerofcode.withgoogle.com/projects/#5755795897057280)
+- **Mentors**: Robin H. Johnson<robbat2@orbis-terrarum.net> & Ali Maredia
+- **Organization**: [Ceph](https://ceph.com/en/)
+- **Repository**: [RGW S3 Coverage testing]
 
 ## Introduction
 As it stands today, [Ceph/s3-tests](https://github.com/ceph/s3-tests) use a limited fraction of the Boto S3 functionality. By instrumenting code coverage of AWS Boto SDK and Ceph/s3-tests, gaps in Ceph/s3-tests can be identified. The objective of this project is to identify parts of unused S3 source code of AWS SDKs using code coverage tools and consequently facilitate writing compatibility tests in Ceph/s3-tests that cover those portions of the SDK for better coverage.
