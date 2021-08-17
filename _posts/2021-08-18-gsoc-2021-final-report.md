@@ -15,7 +15,7 @@ tags: [ gsoc, ceph, RGW, S3, coverage]
 - **Repository**: [RGW S3 Coverage testing](https://github.com/robbat2/rgw-s3-coverage-testing)
 
 ## Introduction
-As it stands today, [s3-tests](https://github.com/ceph/s3-tests) use a limited fraction of the Boto S3 functionality. By instrumenting code coverage of AWS Boto SDK and s3-tests, gaps in s3-tests can be identified. The `objective` of this project is to identify parts of unused S3 source code of AWS SDKs using code coverage tools and consequently facilitate writing compatibility tests in s3-tests that cover those portions of the SDK for better coverage.
+As it stands today, [s3-tests](https://github.com/ceph/s3-tests) use a limited fraction of the Boto S3 functionality. By instrumenting code coverage of AWS Boto SDK and Ceph s3-tests, gaps in s3-tests can be identified. The `objective` of this project is to identify parts of unused S3 source code of AWS SDKs using code coverage tools and consequently facilitate writing compatibility tests in Ceph s3-tests for better coverage.
 
 ## Contents
 - [Getting started](#getting-started)
@@ -30,7 +30,7 @@ As it stands today, [s3-tests](https://github.com/ceph/s3-tests) use a limited f
 
 ## Getting started
 Firstly, to get started clone this [repository](https://github.com/robbat2/rgw-s3-coverage-testing).
-Then, to build the RGW `s3-tests` testing environment with coverage follow the instructions below:
+Then, to build the Ceph `s3-tests` testing environment with coverage follow the instructions below:
 
 ``Build using Scripts (stable)``: The script **bootstrap** starts a [ceph-demo](https://github.com/ceph/ceph-container/blob/master/src/daemon/demo.sh) cluster in a container and also an [s3-tests](https://github.com/ceph/s3-tests) container against the RGW of the ceph-demo cluster. It also automates generating `coverage` reports `(JSON+XML+HTML)` and a XML output of s3-tests that was run (nose-output.xml). 
 
@@ -38,7 +38,7 @@ A sample configuration file named ``s3tests.conf.SAMPLE`` has been provided in t
 
 The scripts takes in arguments of the section of s3-tests to run along with nosetests.
 The boostrap script already includes the prefix ``
-S3TEST_CONF=your.conf ./virtualenv/bin/nosetests -v``.The corresponding section of tests to run that comes after the above command is provided as argument to the bootstrap script.
+S3TEST_CONF=your.conf ./virtualenv/bin/nosetests -v``.The corresponding section of tests to run that comes after the above command is provided as argument to the `bootstrap` script.
 
 For example, if you want to run all the s3-tests like this:
 ```
@@ -81,15 +81,15 @@ To gather a list of tests being run, run this:
 ```
 docker-compose up -d
 ```
-*Note: You can modify the `.conf.SAMPLE` according to your requirements and the `bootstrap` script will generate the corresponding `.conf` file internally.
+*Note: You can modify the `.conf.SAMPLE` according to your requirements and the `bootstrap` script will generate the corresponding `.conf` file internally*
 
 ## Coverage output
 Leveraging the above build methods with specified tests, an output directory will appear by the name of `s3tests-output/`. This directory contains the following files:
-- `cov-analysis.txt`: Contains a list of all Boto SDK s3 source files with corresponding function signatures that has less than 100% coverage. Read more here.
+- `cov-analysis.txt`: Contains a list of all Boto SDK s3 source files with corresponding function signatures that has less than 100% coverage. Read more [here](#analyzing-coverage-of-the-source-sdk-files).
 - `report.txt`: Contains a tabular representation of the coverage (hits and misses) of the source files against the test.
 - `coverage_html/`:  This directory contains all the annotated coverage html files for easy viewing of coverage output corresponding to the test ran.
-- `coverage.json` : This JSON file contains the coverage output of BOTO SDK and other source files corresponding to test taht was run.
-- `coverage.xml`: This XML file contains the coverage output of BOTO SDK and other source files corresponding to test taht was run.
+- `coverage.json` : This JSON file contains the coverage output of Boto SDK and other source files corresponding to test that was run.
+- `coverage.xml`: This XML file contains the coverage output of Boto SDK and other source files corresponding to test that was run.
 - `nose-output.xml`: This XML file contains the output of the tests that was run against the RGW for easy debugging pruposes. 
 
 ## Project Goals
@@ -99,7 +99,7 @@ The project work during the GSoC period can be divided into three parts:
 In the first phase of the project, we automated the running of [s3-tests](https://github.com/ceph/s3-tests) with coverage tools against the RGW of the ceph-demo cluster in a dockerized setup. The coverage library used is the [coverage.py](https://coverage.readthedocs.io/en/coverage-5.5/) python package. In this portion we created the Dockerfile and the `run-tests.sh` script for running s3-tests with coverage and bootstrapping the ceph-demo cluster with the necessary configuration as mentioned in the `.conf.SAMPLE` file. The `host_IP` in the `.conf.SAMPLE` is set accordingly to the persistent container IP of the ceph-demo cluster in the system.
 
 ### Generating coverage output files 
-In this phase of the project, we refactored our scripts and docker related files to scope in the feature of generating coverage output files for specific tests and attributed suite of nosetests in the [s3-tests](https://github.com/ceph/s3-tests) repo in all three formats,  `HTML`, `JSON`, `XML`. The `nose-output.xml` was also added for debugging purposes.
+In this phase of the project, we refactored our scripts and docker related files to scope in the feature of generating coverage output files for specific tests and attributed suite of nosetests in the [s3-tests](https://github.com/ceph/s3-tests) repo in all three formats,  `HTML`, `JSON`, `XML`. The `nose-output.xml` was also added for debugging purposes. The coverage files were parsed to generate a coverage report file with various necessary scores like coverage percentage per source file, all the lines that were missed during coverage etc.
 
 ### Analyzing coverage of the source SDK files
 In the last phase of project, we explored and implemented a Python script (a.k.a [`analyzer.py`](https://github.com/robbat2/rgw-s3-coverage-testing/blob/main/analyzer.py)) which analyzes the `coverage.json` file and identifies the portions of the Boto SDK source files that needs coverage and lists out the sourc file signatures with the corresponding source-file paths in the `cov-analysis.txt` file against the test that was run against the RGW.
