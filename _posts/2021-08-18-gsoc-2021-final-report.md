@@ -4,7 +4,7 @@ title: Final report for GSoC'21
 gh-repo: robbat2/rgw-s3-coverage-testing
 cover-img: /assets/img/2020-08-16/cover.png
 thumbnail-img: /assets/img/2020-08-16/thumb.png
-tags: [blog, gsoc, ceph, RGW, S3, coverage]
+tags: [ gsoc, ceph, RGW, S3, coverage]
 ---
 
 ## Google Summer of Code 2021 Project
