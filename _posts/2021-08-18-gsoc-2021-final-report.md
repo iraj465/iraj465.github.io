@@ -172,42 +172,45 @@ With each source file attribute under ``files`` we checked whether it was a Boto
 
 A snippet of the output of the `cov-analysis.txt` for the test `s3tests_boto3.functional.test_s3:test_bucket_acl_default` is given below:
 
-> ...
-> URL:/s3-tests/virtualenv/lib/python3.6/site-packages/boto3/s3/inject.py
->FUNCTION:object_summary_load
->FUNCTION:upload_file
->FUNCTION:download_file
->FUNCTION:bucket_upload_file
->FUNCTION:bucket_download_file
->FUNCTION:object_upload_file
->FUNCTION:upload_fileobj
->FUNCTION:bucket_upload_fileobj
->FUNCTION:object_upload_fileobj
->FUNCTION:download_fileobj
->FUNCTION:bucket_download_fileobj
->FUNCTION:object_download_fileobj
-> ...
+
+```
+...
+URL:/s3-tests/virtualenv/lib/python3.6/site-packages/boto3/s3/inject.py
+FUNCTION:object_summary_load
+FUNCTION:upload_file
+FUNCTION:download_file
+FUNCTION:bucket_upload_file
+FUNCTION:bucket_download_file
+FUNCTION:object_upload_file
+FUNCTION:upload_fileobj
+FUNCTION:bucket_upload_fileobj
+FUNCTION:object_upload_fileobj
+FUNCTION:download_fileobj
+FUNCTION:bucket_download_fileobj
+FUNCTION:object_download_fileobj
+...
+```
 
 Another snippet of the output of the `cov-analysis.txt` for the test `s3tests.functional.test_s3.test_append_normal_object` is given below:
 
-> ...
->URL:/s3-tests/virtualenv/lib/python3.6/site-packages/boto/s3/bucketlistresultset.py
->FUNCTION:bucket_lister
->FUNCTION:__init__
->FUNCTION:__iter__
->FUNCTION:versioned_bucket_lister
->FUNCTION:multipart_upload_lister
->FUNCTION:object_download_fileobj
-> ...
->URL:/s3-tests/virtualenv/lib/python3.6/site-packages/boto/s3/connection.py
->FUNCTION:check_lowercase_bucketname
->FUNCTION:wrapper
->FUNCTION:get_bucket_server
->FUNCTION:build_url_base
->FUNCTION:build_host
->FUNCTION:build_auth_path
->FUNCTION:build_path_base
-> ...
+```
+...
+URL:/s3-tests/virtualenv/lib/python3.6/site-packages/boto/s3/bucketlistresultset.py
+FUNCTION:bucket_lister
+FUNCTION:versioned_bucket_lister
+FUNCTION:multipart_upload_lister
+FUNCTION:object_download_fileobj
+...
+URL:/s3-tests/virtualenv/lib/python3.6/site-packages/boto/s3/connection.py
+FUNCTION:check_lowercase_bucketname
+FUNCTION:wrapper
+FUNCTION:get_bucket_server
+FUNCTION:build_url_base
+FUNCTION:build_host
+FUNCTION:build_auth_path
+FUNCTION:build_path_base
+...
+```
 
 
 
