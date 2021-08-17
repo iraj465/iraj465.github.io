@@ -163,7 +163,6 @@ We extract the information from coverage output obtained for the Boto SDK source
 With each source file attribute under ``files`` we checked whether it was a Boto SDK source file and then consequently we extracted the `missing_lines` list and other coverage measures for each such source s3 SDK file. The next step was to identify from the `missing_lines` list the function signatures in the corresponding source files which needs more coverage. 
 
 **Solution approach**
-
 1. We set the Boto SDK source files' python function signatures as an `Interval tree` ( each interval spans the starting line number as lower limit and function end line number as upper limit).
 
 2. When run against the exact line number of coverage output, we can compute exact function coverage of function definitions through the interval tree and identify the corresponding list of Boto SDK source-file function signatures where new tests need to be written for better coverage.
@@ -208,8 +207,7 @@ FUNCTION:build_host
 FUNCTION:build_auth_path
 FUNCTION:build_path_base
 ...
-```
-
+```  
 
 ## Pull Request changelog
 The pull requests introduced in the project and their activity during the period of GSoC is summarized below:
