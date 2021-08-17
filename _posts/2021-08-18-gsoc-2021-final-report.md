@@ -2,7 +2,7 @@
 layout: post
 title: Final report for GSoC'21
 gh-repo: robbat2/rgw-s3-coverage-testing
-cover-img: /assets/img/2020-08-16/cover.png
+cover-img: /assets/img/cover.png
 thumbnail-img: /assets/img/2020-08-16/thumb.png
 tags: [ gsoc, ceph, RGW, S3, coverage]
 ---
