@@ -20,6 +20,7 @@ As it stands today, [s3-tests](https://github.com/ceph/s3-tests) use a limited f
 ## Contents
 
 - [Getting started](#getting-started)
+- [Coverage output](#coverage-output)
 - [Options](#options)
   - [Sidebar menu](#sidebar-menu)
   - [Sticky sidebar content](#sticky-sidebar-content)
@@ -30,7 +31,9 @@ As it stands today, [s3-tests](https://github.com/ceph/s3-tests) use a limited f
 - [License](#license)
 
 ## Getting started
-Firstly, to get started clone this [repository](https://github.com/robbat2/rgw-s3-coverage-testing).To build the RGW `s3-tests` testing environment with coverage follow the instructions below:
+Firstly, to get started clone this [repository](https://github.com/robbat2/rgw-s3-coverage-testing).
+Then, to build the RGW `s3-tests` testing environment with coverage follow the instructions below:
+
 ``Build using Scripts (stable)``: The script **bootstrap** starts a [ceph-demo](https://github.com/ceph/ceph-container/blob/master/src/daemon/demo.sh) cluster in a container and also an [s3-tests](https://github.com/ceph/s3-tests) container against the RGW of the ceph-demo cluster. It also automates generating `coverage` reports `(JSON+XML+HTML)` and a XML output of s3-tests that was run (nose-output.xml). 
 
 A sample configuration file named ``s3tests.conf.SAMPLE`` has been provided in this repo which serves as the configuration file for running s3tests. Make changes in the ``.SAMPLE`` file itself, boostrap script would generate corresponding ``.conf`` file for you with appropriate configurations.
@@ -80,7 +83,17 @@ To gather a list of tests being run, run this:
 ```
 docker-compose up -d
 ```
+## Coverage output
+Leveraging the above build methods with specified tests, an output directory will appear by the name of `s3tests-output/`. This directory contains the following files:
 
+- `cov-analysis.txt`: Contains a list of all Boto SDK s3 source files with corresponding function signatures that has less than 100% coverage. Read more here.
+- `report.txt`: Contains a tabular representation of the coverage (hits and misses) of the source files against the test.
+- `coverage_html/`:  This directory contains all the annotated coverage html files for easy viewing of coverage output corresponding to the test ran.
+- `coverage.json` : This JSON file contains the coverage output of BOTO SDK and other source files corresponding to test taht was run.
+- `coverage.xml`: This XML file contains the coverage output of BOTO SDK and other source files corresponding to test taht was run.
+- `nose-output.xml`: This XML file contains the output of the tests that was run against the RGW for easy debugging pruposes. 
+
+## Project Goals
 
 Pull requests created in the period of GSoC:
 
