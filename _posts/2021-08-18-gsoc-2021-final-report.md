@@ -98,10 +98,16 @@ Leveraging the above build methods with specified tests, an output directory wil
 The project work during the GSoC period can be divided into three parts:
 
 ### Automating s3tests and ceph cluster with coverage
-In the first part of the project, we automated the running of [s3-tests](https://github.com/ceph/s3-tests) with coverage tools against the RGW of the ceph-demo cluster in a dockerized setup. The coverage library used is the [coverage.py](https://coverage.readthedocs.io/en/coverage-5.5/) python package. In this portion we created the Dockerfile for running s3-tests with coverage and bootstrapping the ceph-demo cluster with the necessary configuration as mentioned in the `.conf.SAMPLE` file. The `host_IP` in the `.conf.SAMPLE` is set accordingly to the set container IP of the ceph-demo cluster in the system.
+In the first phase of the project, we automated the running of [s3-tests](https://github.com/ceph/s3-tests) with coverage tools against the RGW of the ceph-demo cluster in a dockerized setup. The coverage library used is the [coverage.py](https://coverage.readthedocs.io/en/coverage-5.5/) python package. In this portion we created the Dockerfile and the `run-tests.sh` script for running s3-tests with coverage and bootstrapping the ceph-demo cluster with the necessary configuration as mentioned in the `.conf.SAMPLE` file. The `host_IP` in the `.conf.SAMPLE` is set accordingly to the persistent container IP of the ceph-demo cluster in the system.
 
-### 2. Generating coverage output files for the test that was run against the RGW in all three formats: `HTML`, `JSON`, `XML`.
-### 3. Creating a Python script that analyzes the coverage output (`coverage.json`) and identifies portions of Boto SDK with low coverage.
+### Generating coverage output files 
+In this phase of the project, we refactored our scripts and docker related files to scope in the feature of generating coverage output files for specific tests and attributed suite of nosetests in the [s3-tests](https://github.com/ceph/s3-tests) repo in all three formats,  `HTML`, `JSON`, `XML`. The `nose-output.xml` was also added for debugging purposes.
+
+### Analyzing coverage of the source SDK files
+In the last phase of project, we explored and implemented a Python script (a.k.a [`analyzer.py`](https://github.com/robbat2/rgw-s3-coverage-testing/blob/main/analyzer.py)) which analyzes the `coverage.json` file and identifies the portions of the Boto SDK source files that needs coverage and lists out the sourc file signatures with the corresponding source-file paths in the `cov-analysis.txt` file against the test that was run against the RGW.
+
+**Idea**:
+3. Creating a Python script that analyzes the coverage output (`coverage.json`) and identifies portions of Boto SDK with low coverage.
 
 
 ## Pull Request history
