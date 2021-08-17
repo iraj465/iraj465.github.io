@@ -208,7 +208,7 @@ FUNCTION:build_auth_path
 FUNCTION:build_path_base
 ...
 ```  
-
+&nbsp;
 ## Pull Request changelog
 The pull requests introduced in the project and their activity during the period of GSoC is summarized below:
 
@@ -227,14 +227,14 @@ The pull requests introduced in the project and their activity during the period
 | [Docker setup](https://github.com/robbat2/rgw-s3-coverage-testing/pull/1)                    |  robbat2     | Approved          | Closed           |
 | [key limit in delete_object()](https://github.com/ceph/s3-tests/pull/400)                    |  alimaredia  | Pending           | Open          |
 | [Invalid iso8601 in transition date set in Transition rule ](https://github.com/ceph/s3-tests/pull/399)                    |  alimaredia  | Approved           | Closed        |
-
+&nbsp;
 
 ## Work left To Do (Future Work)
 The project objectives was accomplished keeping in line with the Python SDK of AWS (Boto) and the results needs to extended toward SDKs in other languages like Java and Golang. A plan needs to be formulated going forward that align the coverage work with Ceph's maintained s3-tests repos in these programming languages. 
     
 ## Special Thanks
-Overall it was a wonderful experience working first time in open-source and that too being coupled with the fantastic Ceph community throughout the GSoC project. I was lucky enough to be mentored by very seasoned community contributors and more importantly very helping people in Robin H. Johnson &lt;[robbat2](https://github.com/robbat2)>  & Ali Maredia &lt;[alimaredia](https://github.com/alimaredia)>,
+Overall it was a wonderful experience working first time in open-source and that too being coupled with the ever-growing Ceph community throughout the GSoC project. I was lucky enough to be mentored by very seasoned community contributors and more importantly very helping people in Robin H. Johnson &lt;[robbat2](https://github.com/robbat2)>  & Ali Maredia &lt;[alimaredia](https://github.com/alimaredia)>,
 giving constructive suggestions and guiding me through the program.
 
 Last but not the least, my final thanks to Google for organizing this amazing program. I feel GSoC made it easier for me to get started with open source contributions and development in general. It was personally a very exciting moment for me to realize that my code was gonna be used by the wider community. This idea made me a more responsible developer and brought out changes in me overall.
-I look forward to continue contributing to the Ceph's amazing community and open-source in general.
+I look forward to continue contributing to the amazing Ceph community and open-source in general.
