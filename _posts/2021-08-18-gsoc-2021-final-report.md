@@ -207,8 +207,8 @@ FUNCTION:build_host
 FUNCTION:build_auth_path
 FUNCTION:build_path_base
 ...
-```  
-&nbsp;
+``` 
+
 ## Pull Request changelog
 The pull requests introduced in the project and their activity during the period of GSoC is summarized below:
 
