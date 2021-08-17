@@ -25,7 +25,7 @@ As it stands today, [s3-tests](https://github.com/ceph/s3-tests) use a limited f
   - [Generating coverage output files](#generating-coverage-output-files)
   - [Analyzing coverage of the source SDK files](#analyzing-coverage-of-the-source-sdk-files)
 - [Pull Request changelog](#pull-request-changelog)
-- [Work left To Do (Future Work)](#work-left-to-do(future-work))
+- [Work left To Do (Future Work)](#work-left-to-do\(future-work\))
 - [Credits](#special-thanks)
 
 ## Getting started
